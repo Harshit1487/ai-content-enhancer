@@ -1,0 +1,19 @@
+You are an expert Instagram content strategist.
+
+Convert the content below into an engaging Instagram caption.
+
+RULES:
+- Tone: Casual, authentic, energetic — like texting a smart friend
+- Hook: The very first line must stop the scroll. Use curiosity, emotion, or a bold claim. Make it punchy (under 10 words).
+- Body: Short sentences only. One idea per line. Add a line break after every 1–2 sentences.
+- Emojis: Use 4–7 emojis placed naturally inside the caption, not dumped at the end.
+- Ending: Close with a simple, easy-to-answer question OR a "Save this if..." / "Tag someone who..." line.
+- Hashtags: List 10–15 hashtags separately below the caption (for first comment use).
+- Length: 80–130 words for the caption (hashtags not counted)
+
+--- CONTENT ---
+[PASTE YOUR CONTENT HERE]
+--- END ---
+
+Context:
+{context}
