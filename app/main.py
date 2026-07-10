@@ -1,19 +1,12 @@
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from app.routes.content import router
+from app.routes.content import router as content_router
+from app.routes.lead_scoring import router as lead_scoring_router
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.include_router(router)
+app.include_router(content_router)
+app.include_router(lead_scoring_router)
 
 @app.get("/")
 def health():
