@@ -2,8 +2,12 @@ from datetime import datetime
 
 from app.services.unipile_service import fetch_post_comments
 from app.services.mapper import map_comments_to_engagements
-from app.utils.file_utils import write_json_file
-from app.services.unipile_service import fetch_post_content
+# from app.utils.file_utils import write_json_file
+# from app.services.unipile_service import fetch_post_content
+from app.utils.file_utils import (
+    write_json_file,
+    read_json_file,
+)
 
 
 def fetch_unipile_comments_job():
@@ -11,20 +15,33 @@ def fetch_unipile_comments_job():
     print("=" * 60)
     print("Fetching LinkedIn comments")
     print(datetime.now())
-    post_text = fetch_post_content()
+    # post_text = fetch_post_content()
 
-    if(post_text):
-        print(post_text)
+    # if(post_text):
+    #     print(post_text)
+
+    posts = read_json_file("app/models/post_data.json")
+
+    for post in posts:
+        response = fetch_post_comments(post["postId"])
+
+        if response:
+            engagements = map_comments_to_engagements(
+                response=response,
+                post_text=post["postText"],
+            )
+
+    # response = fetch_post_comments(post_id)
 
 
-    response = fetch_post_comments()
+    # # response = fetch_post_comments()
 
-    if response:
+    # if response:
 
-        engagements = map_comments_to_engagements(
-        response=response,
-        post_text=post_text,
-)
+    #     engagements = map_comments_to_engagements(
+    #     response=response,
+    #     post_text=post_text,
+# )
 
         print("Mapped Engagements")
 
