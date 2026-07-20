@@ -28,7 +28,7 @@ TARGET_INDUSTRIES = [
 
 
 @router.post(
-    "/score-leads",
+    "/generate-leads",
     response_model=list[LeadScoreResponse],
     status_code=status.HTTP_200_OK,
 )
