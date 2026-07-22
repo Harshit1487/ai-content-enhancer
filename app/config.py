@@ -8,6 +8,10 @@ AI_PROVIDERS = os.getenv("AI_PROVIDERS", "gemini,grok").split(",")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL")
+GEMINI_MODELS = [
+    os.getenv("GEMINI_MODEL_1"),
+    os.getenv("GEMINI_MODEL_2")
+]
 
 GROK_API_KEY = os.getenv("GROK_API_KEY")
 GROK_MODEL = os.getenv("GROK_MODEL")
