@@ -102,7 +102,7 @@ def call_huggingface(prompt):
     )
 
     response = client.chat.completions.create(
-    model="meta-llama/Llama-3.1-8B-Instruct",
+    model=HF_MODEL or "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
     messages=[
         {
             "role": "user",

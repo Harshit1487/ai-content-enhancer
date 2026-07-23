@@ -3,7 +3,8 @@ import json
 from typing import Any
 from openai import OpenAI
 from app.config import (
-    HF_API_KEY
+    HF_API_KEY,
+    HF_MODEL
 )
 
 from app.database.leads_repository import save_lead
@@ -17,7 +18,7 @@ DEFAULT_TARGET_INDUSTRIES = [
     "Manufacturing",
 ]
 
-MODEL = "meta-llama/Llama-3.1-8B-Instruct"
+MODEL = HF_MODEL or "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B"
 
 prompt_file = "app/prompts/lead_scoring_system_prompt.txt"
 
