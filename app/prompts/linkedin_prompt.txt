@@ -39,7 +39,7 @@ RULES:
   - Ask one engaging question.
 
 - Hashtags:
-  - Add 3–5 relevant hashtags.
+  - Add strictly 3 to 5 relevant hashtags (never exceed 5 hashtags).
 
 - Length:
   - 150–250 words.

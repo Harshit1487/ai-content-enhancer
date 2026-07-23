@@ -105,6 +105,12 @@ class GuardrailService:
         # Remove URLs
         content = re.sub(self.URL_REGEX, "", content)
 
+        # Trim excess hashtags if greater than MAX_HASHTAGS
+        hashtags = re.findall(self.HASHTAG_REGEX, content)
+        if len(hashtags) > self.MAX_HASHTAGS:
+            for tag in hashtags[self.MAX_HASHTAGS:]:
+                content = content.replace(tag, "", 1)
+
         # Remove duplicate spaces
         content = re.sub(r"\s+", " ", content)
 

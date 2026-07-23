@@ -126,30 +126,36 @@ def enhance_content(context, platform):
 
     prompt = system_prompt.format(context=context)
 
+def _call_provider_by_name(provider: str, prompt: str) -> str:
+    if provider == "gemini":
+        return call_gemini(prompt)
+    elif provider == "huggingface":
+        return call_huggingface(prompt)
+    elif provider == "grok":
+        return call_grok(prompt)
+    elif provider == "openai":
+        return call_openai(prompt)
+    else:
+        raise Exception(f"Unknown provider: {provider}")
+
+def enhance_content(context, platform):
+
+    if platform.lower() == "linkedin":
+        prompt_file = "app/prompts/linkedin_prompt.txt"
+    else:
+        prompt_file = "app/prompts/instagram_prompt.txt"
+
+    with open(prompt_file, encoding="utf-8") as f:
+        system_prompt = f.read()
+
+    prompt = system_prompt.format(context=context)
+
     for provider in AI_PROVIDERS:
 
         try:
 
             print(f"Trying {provider}")
-
-            if provider == "gemini":
-                # return call_gemini(prompt)
-                generated = call_gemini(prompt)
-            
-            elif provider == "huggingface":
-                # return call_huggingface(prompt)
-                generated = call_huggingface(prompt)
-            
-            elif provider == "grok":
-                # return call_grok(prompt)
-                generated = call_grok(prompt)
-
-            elif provider == "openai":
-                # return call_openai(prompt)
-                generated = call_openai(prompt)
-            
-            else:
-              raise Exception(f"Unknown provider: {provider}")
+            generated = _call_provider_by_name(provider, prompt)
             
             validation = guardrail.validate(generated)
 
@@ -163,9 +169,9 @@ def enhance_content(context, platform):
 
             retry_prompt = guardrail.rewrite_prompt(prompt)
 
-            print("Retrying with stricter prompt...")
+            print(f"Retrying with stricter prompt using {provider}...")
 
-            regenerated = call_huggingface(retry_prompt)
+            regenerated = _call_provider_by_name(provider, retry_prompt)
 
             # Validate regenerated content
             validation = guardrail.validate(regenerated)
@@ -181,7 +187,7 @@ def enhance_content(context, platform):
             continue
 
         except Exception as e:
-            print(e)
+            print(f"Error with provider {provider}: {e}")
             continue
 
     raise Exception("All AI providers failed.")
